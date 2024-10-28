@@ -1,0 +1,88 @@
+/* Reset básico de márgenes, paddings, y bordes */
+* {
+    margin: 0; /* Quita el margen que el navegador maneja por defecto */
+    padding: 0; /* Quita el padding que el navegador maneja por defecto */
+    box-sizing: border-box; /* Hace que el tamaño de un elemento incluya el padding y el borde */
+} /* Esto asegura que todo elemento se ajuste dentro de sus bordes y a los que nosotros desarrollemos */
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0px;
+}
+
+
+/* ------------------------------------------------------------------ */
+/* Estilos PRINCIPAL del cuerpo BODY */
+body {
+    width: 100%;
+    background-color: #f0f8ff; /* Cambia esto al color de tu preferencia */
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto; /* Header, Main, Footer */
+    grid-template-columns: 1fr; /* Especifica cómo se distribuyen las columnas en función del ancho disponible */
+}
+
+/* ------------------------------------------------------------------ */
+/* Estilo HEADER general */
+/* Estilo del título principal */
+#tituloPrimero h1 {
+    position: sticky; /* Fija el título en la parte superior */
+    top: 0; /* Posición en la parte superior */
+    width: 100%; /* Asegura que el título ocupe el ancho completo */
+    background-color: #f0f8ff; /* Fondo para que no se superponga con otros elementos */
+    text-align: center;
+    font-weight: bold;
+    color: #0066cc;
+    text-decoration: underline;
+    font-family: 'Arial', sans-serif;
+    /*z-index: 1; /* Asegura que el título esté por encima de otros elementos */
+}
+
+/* Estilo del título secundario */
+#tituloSegundo h2 {
+    text-align: left;
+    color: #333333;
+    font-family: 'Arial', sans-serif;
+    padding-bottom: 0px;
+    margin-left: 4% ;
+}
+
+/* ------------------------------------------------------------------ */
+/* Estilo MAIN general */
+main {
+    display: grid;
+    justify-items: center; /* Alinea horizontalmente (eje x) */
+    align-items: center; /* Alinea verticalmente (eje y) */
+}
+
+/* Estilo cuadro del juego */
+#cuadroJuego {
+    position: relative; /* Necesario ya que asignamos al balon position: absolute; */
+    width: 90%; /* Hace que el cuadro sea 90% del ancho disponible */
+    min-height: 90%; /* Alto del cuadro */
+    background-color: #ccfdd7; /* Color de fondo */
+    border: 2px solid blueviolet; /* Borde de color */
+    box-sizing: border-box; /* Bordes y relleno se incluyen en los cálculos de ancho y alto del contenedor */
+    margin: auto; /* Un margen centrado */
+}
+
+/* Estilo balon */
+#balon {
+    position: absolute; /* Posicionamiento absoluto para moverlo con JS */
+    width: 20px; /* Tamaño del balon */
+    height: 20px;
+    background-color: rgb(255, 123, 0); /* Color del balon */
+    border-radius: 50%; /* Hace el balon circular */
+    /*z-index: 1; /* Posiciona el balon delante del cuadro */
+}
+
+/* ------------------------------------------------------------------ */
+/* Estilo FOOTER primario */
+#tituloTercero h3 {
+    text-align: left;
+    color: #056115;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    margin-left: 1% ;
+    margin-bottom: 0.3% !important;
+}
+
