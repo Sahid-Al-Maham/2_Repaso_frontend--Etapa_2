@@ -9,14 +9,19 @@
     let balonX = 0;
     let balonY = 0;
 
-    // Velocidad del balon, inicializa variables antes de comenzar
-    let veloX = 5;
-    let veloY = 5;
+    // Velocidad del balon, inicializa variables antes de comenzar, el número es la velocidad el signo la dirección de rebote
+    let veloX = 5; // + rebota hacia la derecha, - rebota hacia la izquierda
+    let veloY = 5; // + rebota hacia abajo, - rebota hacia arriba en Y
+    let veloRamdom; // Variable global de número ramdom para usar en rebote
+    // Define límites de velocidad
+    const veloMin = 2; // Velocidad mínima
+    const veloMax = 15; // Velocidad máxima
 
-    let movimientoActivo = true; // Bandera para activar/desactivar movimiento
-    let reboteActivo = false; // Bandera para activar/desactivar rebote
-    let seguirMouse = false; // Definición global para controlar el seguimiento del mouse en modo rebote
-    let seguirMouseEnRebote = true; // Bandera que comienza con el seguimiento en rebote activado
+    // 
+    let movimientoActivo = true;        // Bandera para activar/desactivar movimiento
+    let reboteActivo = false;           // Bandera para activar/desactivar rebote
+    let seguirMouse = false;            // Bandera para controlar el seguimiento del mouse
+    let seguirMouseEnRebote = true;     // Bandera que comienza con el seguimiento en rebote activado
 
     // Obtener dimensiones del cuadro y balón
     const rect = cuadroJuego.getBoundingClientRect();
@@ -31,15 +36,15 @@
 
     // Detectar clic derecho e izquierdo del mouse
     cuadroJuego.addEventListener('mousedown', (e) => {
-        if (e.button === 2) { // Click derecho
-            movimientoActivo = false; // Detener el movimiento
+        if (e.button === 2) {           // Click derecho
+            movimientoActivo = false;   // Detener el movimiento
 
-        } else if (e.button === 0) { // Click izquierdo
+        } else if (e.button === 0) {    // Click izquierdo
             // Actualizar la posición del balón
             const rect = cuadroJuego.getBoundingClientRect(); 
             mouseX = e.clientX - rect.left - balon.offsetWidth / 2; 
             mouseY = e.clientY - rect.top - balon.offsetHeight / 2;
-            movimientoActivo = true; // Reactivar el movimiento
+            movimientoActivo = true;    // Reactivar el movimiento
         }
 
     });
@@ -52,27 +57,6 @@
     e.type: tipo de evento (ej. 'click', 'mousemove', etc.)
     e.target: el elemento que disparó el evento 
     */
-
-    // Evento de teclado para alternar entre rebote y no rebote y seguir o no mouse 
-    // En lugar de hacerlo usando "if" y "else if" emplearemos "switch" para que codigo se ve a distinto
-    /*document.addEventListener('keydown', (e) => {
-        if (e.key === 'r') { // Tecla "r" para iniciar rebote true
-            reboteActivo = true;
-            console.log('Rebote activado');
-        } else if (e.key === 'p') { // Tecla "p" cambia el valor de la misma variable a false para detener rebote
-            reboteActivo = false;
-            console.log('Rebote desactivado');
-        } 
-    
-        else if (e.key === 's') { // Tecla "s" para alternar el seguimiento del mouse en el rebote
-            seguirMouseEnRebote = !seguirMouseEnRebote;
-            console.log(`Modo de rebote: ${seguirMouseEnRebote ? "sigue al mouse" : "libre"}`);
-        }
-        else if (e.key === 'n') { // Tecla "n" para restablecer `seguirMouseEnRebote` a un valor predeterminado
-            seguirMouseEnRebote = false;
-            console.log(`Modo de rebote reiniciado: ${seguirMouseEnRebote ? "sigue al mouse" : "libre"}`);
-        }
-    });*/
 
     // Evento de teclado para alternar entre rebote, seguimiento del mouse en rebote y reiniciar seguimiento
     document.addEventListener('keydown', (e) => {
@@ -139,9 +123,9 @@
             if (balonY < 0) balonY = 0;
             // Límite derecho y límite inferior
             if (balonX > rect.width - balonWidth - bordeDerecho - bordeIzquierdo) 
-                balonX = rect.width - balonWidth - bordeDerecho - bordeIzquierdo; // Agregar bordes porque rect no los contempla
+                balonX = rect.width - balonWidth - bordeDerecho - bordeIzquierdo;   // Agregar bordes porque rect no los contempla
             if (balonY > rect.height - balonHeight - bordeInferior - bordeSuperior) 
-                balonY = rect.height - balonHeight - bordeInferior - bordeSuperior;// Agregar bordes porque rect no los contempla
+                balonY = rect.height - balonHeight - bordeInferior - bordeSuperior; // Agregar bordes porque rect no los contempla
         }
 
         // Movimiento rebote
@@ -157,33 +141,44 @@
                 }
 
             } else {
-                // Actualizar la posición del balón usando `mouseX` y `mouseY`
-                balonX += veloX; //(mouseX - balonX) * 0.05;
-                balonY += veloY; //(mouseY - balonY) * 0.05;
+                // Actualizar la posición del balón
+                balonX += veloX;
+                balonY += veloY;
+                veloRamdom = Math.floor(Math.random() * 10) + 1;
+
                 // Rebote en el límite izquierdo
                 if (balonX <= 0) {
-                    balonX = 0; // Ajustar al borde exacto
-                    veloX = -veloX * 1; //mouseX = rect.width; // - cambia el angulo de rebote, + lo pega al borde
-                    veloY = veloY * 1; // - cambia el rebote a la direccion contraria de la que viene, + sigue la direccion de rebote logica
+                    balonX = 0;         // Ajustar al borde exacto
+                    veloX = (veloX + veloRamdom) * -1;
                 } 
                 // Rebote en el límite derecho
                 else if (balonX >= rect.width - balonWidth - bordeIzquierdo - bordeDerecho) {
                     balonX = rect.width - balonWidth - bordeIzquierdo - bordeDerecho; // Ajustar al borde exacto
-                    veloX = -veloX * 1;  //mouseX = -rect.width;  Dirección de rebote hacia la izquierda (negativo) //
-                    veloY = veloY * 1; // - cambia el rebote a la direccion contraria de la que viene, + sigue la direccion de rebote logica
+                    veloX = (veloX + veloRamdom) * -1; 
                 }
 
                 // Rebote en el límite superior
                 if (balonY <= 0) {
-                    balonY = 0; // Ajustar al borde exacto
-                    veloY = -veloY * 1; //mouseY = rect.height; // Dirección de rebote hacia abajo (positivo)
-                    veloX = veloX * 1; 
+                    balonY = 0;         // Ajustar al borde exacto
+                    veloY = (veloY + veloRamdom) * -1; 
                 } 
                 // Rebote en el límite inferior
                 else if (balonY >= rect.height - balonHeight - bordeSuperior - bordeInferior) {
                     balonY = rect.height - balonHeight - bordeSuperior - bordeInferior; // Ajustar al borde exacto
-                    veloY = -veloY * 1; //mouseY = -rect.height; // Dirección de rebote hacia arriba (negativo)
-                    veloX = veloX * 1; 
+                    veloY = (veloY + veloRamdom) * -1; 
+                }
+
+                // Controlar la velocidad de veloX
+                if (Math.abs(veloX) < veloMin) {
+                    veloX = (veloX < 0 ? veloMin * 2 * -1 : veloMin *2); // Aplicamos operador ternario "?" que es una forma reducida y práctica de if/else: "consulta ? verdadero : falso"
+                } else if (Math.abs(veloX) > veloMax) {
+                    veloX = (veloX < 0 ? -veloMax : veloMax);
+                }
+                // Controlar la velocidad de veloY
+                if (Math.abs(veloY) < veloMin) {
+                    veloY = (veloY < 0 ? veloMin * 2 * -1 : veloMin *2);
+                } else if (Math.abs(veloY) > veloMax) {
+                    veloY = (veloY < 0 ? -veloMax : veloMax);
                 }
 
             }
