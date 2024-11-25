@@ -1,0 +1,40 @@
+
+paletas
+
+mouse
+
+balon se mueve
+
+si 
+? hay rebote
+	si. (rebota)
+	? hay paletas
+		si. 
+		rebote paletas
+		no. 
+		rebote cuadro
+
+ 	no. (sigue mouse) 
+ 	si. 
+	? hay paletas 
+		si.  
+		limite paletas
+ 		no.  
+		limite cuadroJuego
+
+        // Verificar si el mouse está siendo seguido
+        if (seguirMouse)
+        
+        // Mover el balón siguiendo el mouse y considerando los bordes de las paletas
+        
+
+    const vertSupDerI
+    const vertInfDerI
+    const bordeDerI
+    const bordeSupI
+    const bordeInfI
+    const vertSupIzqD
+    const vertInfIzqD
+    const bordeIzqD
+    const bordeSupD
+    const bordeInfD

@@ -1,12 +1,21 @@
 {
   "name": "repaso_frontend",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
+
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+
   "keywords": [],
   "author": "Sahid Al Maham",
   "license": "ISC",
-  "description": "Frontend con html, css y js"
+  "description": "Frontend con html, css y js",
+  
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "howler": "^2.2.4"
+  }
+
 }

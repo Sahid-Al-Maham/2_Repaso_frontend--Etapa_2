@@ -22,8 +22,8 @@ body {
 }
 
 /* ------------------------------------------------------------------ */
-/* Estilo HEADER general */
-/* Estilo del título principal */
+/* Estilos HEADER general */
+/* Estilos del título principal */
 #tituloPrimero h1 {
     position: sticky; /* Fija el título en la parte superior */
     top: 0; /* Posición en la parte superior */
@@ -37,7 +37,7 @@ body {
     /*z-index: 1; /* Asegura que el título esté por encima de otros elementos */
 }
 
-/* Estilo del título secundario */
+/* Estilos del título secundario */
 #tituloSegundo h2 {
     text-align: left;
     color: #333333;
@@ -47,32 +47,68 @@ body {
 }
 
 /* ------------------------------------------------------------------ */
-/* Estilo MAIN general */
+/* Estilos MAIN general */
 main {
     display: grid;
     justify-items: center; /* Alinea horizontalmente (eje x) */
     align-items: center; /* Alinea verticalmente (eje y) */
 }
 
-/* Estilo cuadro del juego */
+/* Estilos cuadro del juego */
 #cuadroJuego {
     position: relative; /* Necesario ya que asignamos al balon position: absolute; */
     width: 90%; /* Hace que el cuadro sea 90% del ancho disponible */
     min-height: 90%; /* Alto del cuadro */
-    background-color: #ccfdd7; /* Color de fondo */
+    background-color: #f7eeff; /* Color de fondo */
     border: 2px solid blueviolet; /* Borde de color */
     box-sizing: border-box; /* Bordes y relleno se incluyen en los cálculos de ancho y alto del contenedor */
     margin: auto; /* Un margen centrado */
+    justify-content: space-between; /* Agregado para el estilo de paleras */
+    align-items: center; /* Agregado para el estilo de paleras */
 }
 
-/* Estilo balon */
+/* Estilos línea central */
+#lineaCentral {
+    position: absolute; /* Posicionamiento absoluto para que se coloque en el centro */
+    top: 0; /* Alineado al borde superior del cuadro */
+    left: 50%; /* Alineado al centro horizontalmente */
+    margin-left: 1.5px;
+    width: 0; /* Ancho completo del cuadro */
+    height: 100%; /* Altura completa del cuadro */
+    /*background-color: blue;*/
+    border-left: 2px dashed rgb(0, 0, 0); /* Línea discontinua de color azul */
+    /*transform: translateX(-50%); /* Mueve la línea hacia la izquierda para centrarla */
+    pointer-events: none; /* Evita que la línea interfiera con los eventos del mouse */
+}
+
+/* Estilos balon */
 #balon {
     position: absolute; /* Posicionamiento absoluto para moverlo con JS */
     width: 20px; /* Tamaño del balon */
     height: 20px;
     background-color: rgb(255, 123, 0); /* Color del balon */
-    border-radius: 50%; /* Hace el balon circular */
-    /*z-index: 1; /* Posiciona el balon delante del cuadro */
+    /*border-radius: 50%; /* Hace el balon circular */
+    z-index: 1; /* Posiciona el balon delante del cuadro */
+}
+
+/* Estilos paletas */
+.paleta {
+    position: absolute; /* Aquí position en absolute hará que la paleta se pegue al contenedor mas cercano con position en relative */
+    background-color: #5c5b5b; /* Color de las paletas */
+    border: 2px solid #333;
+}
+
+#paletaIzquierda {
+    width: 20px; /* Ancho de las paletas */
+    height: 100px; /* Altura de las paletas */
+    /*border-top-right-radius: 50%; /* Solo redondea las esquinas opuestas */
+    /*border-bottom-right-radius: 50%;*/
+}
+#paletaDerecha {
+    width: 20px; /* Ancho de las paletas */
+    height: 60px; /* Altura de las paletas */
+    /*border-top-left-radius: 50%; /* Solo redondea las esquinas opuestas */
+    /*border-bottom-left-radius: 50%;*/
 }
 
 /* ------------------------------------------------------------------ */
